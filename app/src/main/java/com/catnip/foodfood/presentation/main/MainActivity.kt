@@ -1,0 +1,12 @@
+package com.catnip.foodfood.presentation.main
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.catnip.foodfood.R
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+}
