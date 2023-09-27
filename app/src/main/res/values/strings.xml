@@ -2,4 +2,7 @@
     <string name="app_name">FoodFood</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_desc_location">Jl. BSD Green Office Park Jl. BSD Grand Boulevard, Sampora, BSD, Kabupaten Tangerang, Banten 15345</string>
+    <string name="text_location">Lokasi</string>
+    <string name="text_tambahkan_ke_keranjang_28_000">Tambahkan ke Keranjang - 28.000</string>
 </resources>
