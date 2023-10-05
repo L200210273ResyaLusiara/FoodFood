@@ -9,7 +9,7 @@ interface FoodDataSource {
 class FoodDataSourceImpl() : FoodDataSource {
     override fun getFoods(): List<Food> = listOf(
         Food(
-            "Ayam Goreng Kriuk",
+            "Ayam Goreng Kriukaa",
             "Rp 15000",
             "https://raw.githubusercontent.com/L200210273ResyaLusiara/FoodFood/push_asset/images/img_ayam_goreng1.jpg",
             "https://www.google.com/maps?q=-6.2088,106.8450",
