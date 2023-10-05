@@ -14,6 +14,12 @@
             app:destination="@id/detailFragment" />
     </fragment>
     <fragment
+        android:id="@+id/navigation_cart"
+        android:name="com.catnip.foodfood.presentation.fragmentcart.CartFragment"
+        android:label="@string/title_tab_home"
+        tools:layout="@layout/fragment_home" >
+    </fragment>
+    <fragment
         android:id="@+id/detailFragment"
         android:name="com.catnip.foodfood.presentation.fragmentdetail.DetailFragment"
         android:label="fragment_detail"

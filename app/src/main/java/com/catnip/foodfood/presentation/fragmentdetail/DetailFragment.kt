@@ -27,12 +27,6 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private lateinit var food: Food
 
-    companion object {
-        private const val KEY_ID = "food"
-        fun newInstance(identifier: String) = HomeFragment().apply {
-            arguments = bundleOf(identifier to KEY_ID)
-        }
-    }
     private val viewModel: DetailViewModel by viewModels {
         GenericViewModelFactory.create(
             DetailViewModel(food, CartRepository(requireActivity().application))

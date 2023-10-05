@@ -16,7 +16,7 @@ class CartRepository(application: Application) {
         val db = AppDatabase.getInstance(application)
         mCartDao = db.cartDao()
     }
-    fun getAllNotes(): LiveData<List<CartFoodRelation>> = mCartDao.getAllCarts()
+    fun getAllCarts(): LiveData<List<CartFoodRelation>> = mCartDao.getAllCarts()
     fun insert(cart: Cart) {
         executorService.execute { mCartDao.insertCart(cart) }
     }

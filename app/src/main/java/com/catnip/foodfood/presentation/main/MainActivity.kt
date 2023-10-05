@@ -24,7 +24,11 @@ class MainActivity : AppCompatActivity() {
         bind = ActivityMainBinding.inflate(layoutInflater)
         setContentView(bind.root)
         AppDatabase.getInstance(this).foodDao().insertFoods(FoodDataSourceImpl().getFoods())
-        Log.d("TAG", AppDatabase.getInstance(this).foodDao().getAllFoods().toString())
+        setupBottomNav()
+    }
+    private fun setupBottomNav() {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        bind.navView.setupWithNavController(navController)
     }
 }
 

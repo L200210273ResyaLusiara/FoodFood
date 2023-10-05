@@ -8,4 +8,8 @@
     <string name="title_tab_home">Home</string>
     <string name="title_tab_cart">Cart</string>
     <string name="title_tab_profile">Profile</string>
+    <string name="text_title_your_cart">Your Cart</string>
+    <string name="text_checkout">Checkout</string>
+    <string name="text_total_price">Total Price</string>
+    <string name="text_hint_notes">Tulis notes disini</string>
 </resources>
