@@ -1,10 +1,10 @@
-package com.catnip.foodfood.presentation.fragmentcart
+package com.catnip.foodfood.presentation.checkout
 
 import androidx.lifecycle.ViewModel
 import com.catnip.foodfood.local.database.entity.Cart
 import com.catnip.foodfood.local.database.repository.CartRepository
 
-class CartViewModel(private val repo: CartRepository) : ViewModel() {
+class CheckoutViewModel(private val repo: CartRepository) : ViewModel() {
 
     val cartList = repo.getAllCarts()
 
