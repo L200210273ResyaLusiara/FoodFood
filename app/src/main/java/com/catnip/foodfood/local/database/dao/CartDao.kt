@@ -1,5 +1,6 @@
 package com.catnip.foodfood.local.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -14,7 +15,7 @@ import kotlinx.coroutines.flow.Flow
 interface CartDao {
 
     @Query("SELECT * FROM CARTS")
-    fun getAllCarts(): List<CartFoodRelation>
+    fun getAllCarts(): LiveData<List<CartFoodRelation>>
 
     @Query("SELECT * FROM CARTS WHERE id == :id")
     fun getCartById(id: Int): CartFoodRelation

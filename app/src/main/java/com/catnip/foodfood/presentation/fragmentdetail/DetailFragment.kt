@@ -1,5 +1,6 @@
 package com.catnip.foodfood.presentation.fragmentdetail
 
+import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -15,6 +16,7 @@ import coil.load
 import com.catnip.foodfood.databinding.FragmentDetailBinding
 import com.catnip.foodfood.local.database.AppDatabase
 import com.catnip.foodfood.local.database.entity.Food
+import com.catnip.foodfood.local.database.repository.CartRepository
 import com.catnip.foodfood.presentation.fragmenthome.HomeFragment
 import com.catnip.foodfood.utils.GenericViewModelFactory
 import java.text.NumberFormat
@@ -33,7 +35,7 @@ class DetailFragment : Fragment() {
     }
     private val viewModel: DetailViewModel by viewModels {
         GenericViewModelFactory.create(
-            DetailViewModel(food, AppDatabase.getInstance(requireContext()).cartDao())
+            DetailViewModel(food, CartRepository(requireActivity().application))
         )
     }
 

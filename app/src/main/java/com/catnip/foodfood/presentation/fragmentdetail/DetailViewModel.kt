@@ -5,10 +5,11 @@ import androidx.lifecycle.ViewModel
 import com.catnip.foodfood.local.database.dao.CartDao
 import com.catnip.foodfood.local.database.entity.Cart
 import com.catnip.foodfood.local.database.entity.Food
+import com.catnip.foodfood.local.database.repository.CartRepository
 
 class DetailViewModel(
     val food: Food,
-    private val cartDao: CartDao,
+    private val repo: CartRepository,
 ) : ViewModel() {
     val quantity = MutableLiveData<Int>().apply {
         postValue(1)
@@ -29,7 +30,7 @@ class DetailViewModel(
         }
     }
     fun addToCart(){
-        cartDao.insertCart(Cart(foodId = food.id!!, quantity =(quantity.value ?: 0)))
+        repo.insert(Cart(foodId = food.id!!, quantity =(quantity.value ?: 0)))
         quantity.postValue(1)
         price.postValue(food.price)
     }
