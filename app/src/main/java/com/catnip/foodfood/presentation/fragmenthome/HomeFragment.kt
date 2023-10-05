@@ -4,11 +4,13 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +23,8 @@ import com.catnip.foodfood.data.CategoryDataSourceImpl
 import com.catnip.foodfood.data.FoodDataSource
 import com.catnip.foodfood.data.FoodDataSourceImpl
 import com.catnip.foodfood.databinding.FragmentHomeBinding
-import com.catnip.foodfood.model.Food
+import com.catnip.foodfood.local.database.AppDatabase
+import com.catnip.foodfood.local.database.entity.Food
 import com.catnip.foodfood.presentation.fragmenthome.adapter.AdapterLayoutMode
 import com.catnip.foodfood.presentation.fragmenthome.adapter.CategoryListAdapter
 import com.catnip.foodfood.presentation.fragmenthome.adapter.HomeAdapter
@@ -30,6 +33,7 @@ import com.catnip.foodfood.presentation.fragmenthome.adapter.HomeAdapter
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var viewModel: HomeViewModel
 
     private val datasource: FoodDataSource by lazy {
         FoodDataSourceImpl()
@@ -60,9 +64,22 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupImage()
+        setupViewModel()
         setupList()
         setupSwitch()
         setupCategory()
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        )[HomeViewModel::class.java]
+        viewModel.getFoods().observe(requireActivity()) {
+            if (it != null) {
+                adapter.submitData(it)
+            }
+        }
     }
 
     private fun setupCategory() {
@@ -95,9 +112,9 @@ class HomeFragment : Fragment() {
         val span = if(adapter.adapterLayoutMode == AdapterLayoutMode.LINEAR) 1 else 2
         binding.recyclerView.apply {
             layoutManager = GridLayoutManager(requireContext(),span)
-            adapter = this@HomeFragment.adapter
+            binding.recyclerView.adapter = this@HomeFragment.adapter
         }
-        adapter.submitData(datasource.getFoods())
+        viewModel.setFoods(requireContext())
     }
 
     private fun setupSwitch() {
