@@ -7,14 +7,35 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import coil.load
 import com.catnip.foodfood.databinding.FragmentDetailBinding
+import com.catnip.foodfood.local.database.AppDatabase
 import com.catnip.foodfood.local.database.entity.Food
+import com.catnip.foodfood.presentation.fragmenthome.HomeFragment
+import com.catnip.foodfood.utils.GenericViewModelFactory
+import java.text.NumberFormat
+import java.util.Locale
 
 
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private lateinit var food: Food
+
+    companion object {
+        private const val KEY_ID = "food"
+        fun newInstance(identifier: String) = HomeFragment().apply {
+            arguments = bundleOf(identifier to KEY_ID)
+        }
+    }
+    private val viewModel: DetailViewModel by viewModels {
+        GenericViewModelFactory.create(
+            DetailViewModel(food, AppDatabase.getInstance(requireContext()).cartDao())
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,24 +50,37 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         showMenuData()
         setClickListener()
+        setViewModel()
+    }
+
+    private fun setViewModel() {
+        with(viewModel){
+            price.observe(viewLifecycleOwner){
+                binding.btnCart.text="Tambahkan ke Keranjang - ${NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(it)}"
+            }
+            quantity.observe(viewLifecycleOwner){
+                binding.tvQty.text=it.toString()
+            }
+
+        }
+
     }
 
     private fun setClickListener() {
-        var qty = 1
         with(binding){
             tvDescDesc.setOnClickListener {
                 navigateToGoogleMaps()
             }
             btnDec.setOnClickListener{
-                qty-=1
-                qty = if (qty<1) 1 else qty
-                tvQty.text=qty.toString()
+                viewModel.decrement()
             }
             btnInc.setOnClickListener{
-                qty+=1
-                tvQty.text=qty.toString()
+                viewModel.increment()
             }
-
+            btnCart.setOnClickListener{
+                viewModel.addToCart()
+                Toast.makeText(requireContext(),"Berhasil menambahkan ke keranjang",Toast.LENGTH_LONG).show()
+            }
         }
 
     }

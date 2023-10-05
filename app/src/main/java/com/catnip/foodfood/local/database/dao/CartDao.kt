@@ -20,14 +20,11 @@ interface CartDao {
     fun getCartById(id: Int): CartFoodRelation
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCart(cart: Cart): Long
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCarts(cart: List<Cart>)
+    fun insertCart(cart: Cart): Long
 
     @Delete
-    suspend fun deleteCart(cart: Cart): Int
+    fun deleteCart(cart: Cart): Int
 
     @Update
-    suspend fun updateCart(cart: Cart): Int
+    fun updateCart(cart: Cart): Int
 }

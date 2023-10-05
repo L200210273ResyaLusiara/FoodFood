@@ -8,7 +8,7 @@ import com.catnip.foodfood.local.database.AppDatabase
 import com.catnip.foodfood.local.database.entity.Food
 
 class HomeViewModel : ViewModel() {
-    val foods = MutableLiveData<List<Food>>()
+    private val foods = MutableLiveData<List<Food>>()
 
     fun setFoods(context:Context) {
         foods.postValue(AppDatabase.getInstance(context).foodDao().getAllFoods())
