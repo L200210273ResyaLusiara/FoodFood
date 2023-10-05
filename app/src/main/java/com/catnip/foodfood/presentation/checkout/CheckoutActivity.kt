@@ -54,6 +54,9 @@ class CheckoutActivity : AppCompatActivity() {
                 Toast.makeText(this,"Checkout Berhasil",Toast.LENGTH_LONG).show()
                 finish()
             }
+        bind.ivBack.setOnClickListener{
+            finish()
+        }
     }
     private fun setupList() {
         bind.rvCart.itemAnimator = null
