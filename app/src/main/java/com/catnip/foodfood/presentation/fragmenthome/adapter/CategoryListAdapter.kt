@@ -8,10 +8,6 @@ import com.bumptech.glide.Glide
 import com.catnip.foodfood.databinding.ItemCategoryProductBinding
 import com.catnip.foodfood.model.Category
 
-/**
-Written with love by Muhammad Hermas Yuda Pamungkas
-Github : https://github.com/hermasyp
- **/
 class CategoryListAdapter(private val itemClick: (Category) -> Unit) :
     RecyclerView.Adapter<CategoryListAdapter.ItemCategoryViewHolder>() {
 
