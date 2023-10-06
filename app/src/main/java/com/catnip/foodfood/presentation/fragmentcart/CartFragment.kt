@@ -6,13 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.catnip.foodfood.databinding.FragmentCartBinding
 import com.catnip.foodfood.local.database.entity.Cart
 import com.catnip.foodfood.local.database.repository.CartRepository
 import com.catnip.foodfood.presentation.checkout.CheckoutActivity
+import com.catnip.foodfood.presentation.checkout.CheckoutViewModel
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartAdapter
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartListener
 import com.catnip.foodfood.utils.GenericViewModelFactory
@@ -23,8 +22,8 @@ class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
 
-    private val viewModel: CartViewModel by viewModels {
-        GenericViewModelFactory.create(CartViewModel(CartRepository(requireActivity().application)))
+    private val viewModel: CheckoutViewModel by viewModels {
+        GenericViewModelFactory.create(CheckoutViewModel(CartRepository(requireActivity().application)))
     }
 
     private val adapter: CartAdapter by lazy {
