@@ -21,4 +21,9 @@
     <string name="text_e_wallet">Dompet Digital</string>
     <string name="shopping_summary">Ringkasan Pembayaran</string>
     <string name="total_item_price">Total Pembayaran</string>
+    <string name="text_title_profile">Profile</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="phone">No. Telepon</string>
 </resources>
