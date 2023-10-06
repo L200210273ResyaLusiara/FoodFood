@@ -18,7 +18,7 @@ class LinearFoodItemViewHolder(
             crossfade(true)
         }
         binding.tvFoodName.text = item.name
-        //binding.tvFoodPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(item.price)
+        binding.tvFoodPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(item.price)
         binding.root.setOnClickListener{
             onClickListener.invoke(item)
         }
@@ -34,7 +34,7 @@ class GridFoodItemViewHolder(
             crossfade(true)
         }
         binding.tvFoodName.text = item.name
-        //binding.tvFoodPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(item.price)
+        binding.tvFoodPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(item.price)
         binding.root.setOnClickListener{
             onClickListener.invoke(item)
         }

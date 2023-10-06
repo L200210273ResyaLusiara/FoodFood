@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/iv_product_image"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="H,1:1.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iv_remove_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_remove"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_product_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/mcv_counter"
+        app:layout_constraintStart_toEndOf="@id/iv_product_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/lorem" />
+
+    <TextView
+        android:id="@+id/tv_product_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/et_notes_item"
+        app:layout_constraintEnd_toStartOf="@+id/mcv_counter"
+        app:layout_constraintStart_toEndOf="@+id/iv_product_image"
+        app:layout_constraintTop_toBottomOf="@id/tv_product_name"
+        tools:text="IDR. 20.000" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_counter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_remove_cart">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp">
+            <Button
+                android:id="@+id/btn_dec"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:text="-" />
+
+            <TextView
+                android:id="@+id/tv_product_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginHorizontal="8dp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                tools:text="23" />
+
+            <Button
+                android:id="@+id/btn_inc"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxWidth="240dp"
+                android:text="+" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_notes_item"
+        style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:hint="@string/text_hint_notes"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="3"
+        android:padding="8dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_product_image"
+        app:layout_constraintTop_toBottomOf="@id/mcv_counter" />
+</androidx.constraintlayout.widget.ConstraintLayout>
