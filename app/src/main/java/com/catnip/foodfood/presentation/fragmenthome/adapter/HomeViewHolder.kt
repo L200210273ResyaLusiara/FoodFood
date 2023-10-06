@@ -5,7 +5,9 @@ import coil.load
 import com.catnip.foodfood.core.ViewHolderBinder
 import com.catnip.foodfood.databinding.ItemGridMenuBinding
 import com.catnip.foodfood.databinding.ItemLinearMenuBinding
-import com.catnip.foodfood.model.Food
+import com.catnip.foodfood.local.database.entity.Food
+import java.text.NumberFormat
+import java.util.Locale
 
 class LinearFoodItemViewHolder(
     private val binding : ItemLinearMenuBinding,
@@ -16,7 +18,7 @@ class LinearFoodItemViewHolder(
             crossfade(true)
         }
         binding.tvFoodName.text = item.name
-        binding.tvFoodPrice.text = item.price
+        //binding.tvFoodPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(item.price)
         binding.root.setOnClickListener{
             onClickListener.invoke(item)
         }
@@ -32,7 +34,7 @@ class GridFoodItemViewHolder(
             crossfade(true)
         }
         binding.tvFoodName.text = item.name
-        binding.tvFoodPrice.text = item.price
+        //binding.tvFoodPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(item.price)
         binding.root.setOnClickListener{
             onClickListener.invoke(item)
         }

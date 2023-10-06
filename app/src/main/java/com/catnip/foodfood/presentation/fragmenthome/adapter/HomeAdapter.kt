@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.catnip.foodfood.core.ViewHolderBinder
 import com.catnip.foodfood.databinding.ItemGridMenuBinding
 import com.catnip.foodfood.databinding.ItemLinearMenuBinding
-import com.catnip.foodfood.model.Food
+import com.catnip.foodfood.local.database.entity.Food
 
 class HomeAdapter (
     var adapterLayoutMode: AdapterLayoutMode,

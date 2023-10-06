@@ -1,9 +1,7 @@
 package com.catnip.foodfood.presentation.fragmentdetail
 
-import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
-import android.net.http.UrlRequest
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,21 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import coil.load
 import com.catnip.foodfood.databinding.FragmentDetailBinding
-import com.catnip.foodfood.model.Food
+import com.catnip.foodfood.local.database.entity.Food
 
 
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
-
-    private val food: Food? by lazy {
-        DetailFragmentArgs.fromBundle(arguments as Bundle).food
-    }
+    private lateinit var food: Food
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
+        food = DetailFragmentArgs.fromBundle(arguments as Bundle).food!!
         return binding.root
     }
 
@@ -36,9 +32,23 @@ class DetailFragment : Fragment() {
     }
 
     private fun setClickListener() {
-        binding.tvDescDesc.setOnClickListener {
-            navigateToGoogleMaps()
+        var qty = 1
+        with(binding){
+            tvDescDesc.setOnClickListener {
+                navigateToGoogleMaps()
+            }
+            btnDec.setOnClickListener{
+                qty-=1
+                qty = if (qty<1) 1 else qty
+                tvQty.text=qty.toString()
+            }
+            btnInc.setOnClickListener{
+                qty+=1
+                tvQty.text=qty.toString()
+            }
+
         }
+
     }
 
     private fun showMenuData() {
@@ -48,7 +58,7 @@ class DetailFragment : Fragment() {
                     crossfade(true)
                 }
                 tvFoodName.text = p.name
-                tvFoodPrice.text = p.price
+                tvFoodPrice.text = p.price.toString()
                 tvDescDesc.text = p.desc
             }
         }
