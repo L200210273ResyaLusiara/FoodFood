@@ -20,6 +20,12 @@
         tools:layout="@layout/fragment_home" >
     </fragment>
     <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.catnip.foodfood.presentation.fragmentprofile.ProfileFragment"
+        android:label="@string/title_tab_home"
+        tools:layout="@layout/fragment_home" >
+    </fragment>
+    <fragment
         android:id="@+id/detailFragment"
         android:name="com.catnip.foodfood.presentation.fragmentdetail.DetailFragment"
         android:label="fragment_detail"
