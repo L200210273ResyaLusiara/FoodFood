@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -33,11 +35,9 @@ import com.catnip.foodfood.presentation.fragmenthome.adapter.HomeAdapter
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel by viewModels<HomeViewModel>()
 
-    private val datasource: FoodDataSource by lazy {
-        FoodDataSourceImpl()
-    }
+
     private val categoryDatasource: CategoryDataSource by lazy {
         CategoryDataSourceImpl()
     }
@@ -71,11 +71,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        )[HomeViewModel::class.java]
-        viewModel.getFoods().observe(requireActivity()) {
+        viewModel.getFoods().observe(viewLifecycleOwner) {
             if (it != null) {
                 adapter.submitData(it)
             }
