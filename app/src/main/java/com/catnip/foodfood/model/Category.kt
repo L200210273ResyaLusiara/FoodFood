@@ -1,9 +1,9 @@
 package com.catnip.foodfood.model
 
-import java.util.UUID
+import com.google.gson.annotations.SerializedName
 
 data class Category(
-    val id: String = UUID.randomUUID().toString(),
-    val categoryImg: Int,
-    val name: String
+    @SerializedName("image_url")
+    val imageUrl: String,
+    val nama: String
 )

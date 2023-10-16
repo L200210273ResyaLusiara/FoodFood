@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.catnip.foodfood.core.ViewHolderBinder
 import com.catnip.foodfood.databinding.ItemGridMenuBinding
 import com.catnip.foodfood.databinding.ItemLinearMenuBinding
-import com.catnip.foodfood.local.database.entity.Food
+import com.catnip.foodfood.model.Food
 
 class HomeAdapter (
     var adapterLayoutMode: AdapterLayoutMode,
@@ -17,9 +17,9 @@ class HomeAdapter (
 
     private val dataDiffer = AsyncListDiffer(this,object : DiffUtil.ItemCallback<Food>(){
         override fun areItemsTheSame(oldItem: Food, newItem: Food): Boolean {
-            return  oldItem.name == newItem.name &&
-                    oldItem.price == newItem.price &&
-                    oldItem.image == newItem.image
+            return  oldItem.nama == newItem.nama &&
+                    oldItem.harga == newItem.harga &&
+                    oldItem.imageUrl == newItem.imageUrl
         }
 
         override fun areContentsTheSame(oldItem: Food, newItem: Food): Boolean {

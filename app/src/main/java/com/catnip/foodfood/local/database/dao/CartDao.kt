@@ -8,17 +8,15 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.catnip.foodfood.local.database.entity.Cart
-import com.catnip.foodfood.local.database.relation.CartFoodRelation
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CartDao {
 
     @Query("SELECT * FROM CARTS")
-    fun getAllCarts(): LiveData<List<CartFoodRelation>>
+    fun getAllCarts(): LiveData<List<Cart>>
 
     @Query("SELECT * FROM CARTS WHERE id == :id")
-    fun getCartById(id: Int): CartFoodRelation
+    fun getCartById(id: Int): Cart
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCart(cart: Cart): Long

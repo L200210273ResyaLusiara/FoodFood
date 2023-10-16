@@ -74,7 +74,7 @@ class CartFragment : Fragment() {
             adapter.submitData(result)
             var total = 0
             for(data in result){
-                total+=data.cart.quantity*data.food.price
+                total+=data.quantity*data.foodPrice
             }
             binding.tvTotalPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(total)
         }

@@ -9,15 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import coil.load
 import com.catnip.foodfood.databinding.FragmentDetailBinding
-import com.catnip.foodfood.local.database.AppDatabase
-import com.catnip.foodfood.local.database.entity.Food
 import com.catnip.foodfood.local.database.repository.CartRepository
-import com.catnip.foodfood.presentation.fragmenthome.HomeFragment
+import com.catnip.foodfood.model.Food
 import com.catnip.foodfood.utils.GenericViewModelFactory
 import java.text.NumberFormat
 import java.util.Locale
@@ -57,9 +53,7 @@ class DetailFragment : Fragment() {
             quantity.observe(viewLifecycleOwner){
                 binding.tvQty.text=it.toString()
             }
-
         }
-
     }
 
     private fun setClickListener() {
@@ -84,23 +78,21 @@ class DetailFragment : Fragment() {
     private fun showMenuData() {
         food?.let { p ->
             binding.apply {
-                ivFoodImage.load(p.image){
+                ivFoodImage.load(p.imageUrl){
                     crossfade(true)
                 }
-                tvFoodName.text = p.name
-                tvFoodPrice.text = p.price.toString()
-                tvDescDesc.text = p.desc
+                tvFoodName.text = p.nama
+                tvFoodPrice.text = p.hargaFormat
+                tvDescDesc.text = p.detail
             }
         }
     }
 
     private fun navigateToGoogleMaps() {
-        val mapsUrl = food?.mapsUrl // Use safe call operator (?.)
-        if (mapsUrl != null) {
-            val mapsIntent = Intent(Intent.ACTION_VIEW)
-            mapsIntent.data = Uri.parse(mapsUrl)
-            startActivity(mapsIntent)
-        }
+        val mapsUrl = food.alamatResto // Use safe call operator (?.)
+        val mapsIntent = Intent(Intent.ACTION_VIEW)
+        mapsIntent.data = Uri.parse(mapsUrl)
+        startActivity(mapsIntent)
     }
 
 
