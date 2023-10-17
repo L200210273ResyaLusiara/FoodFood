@@ -2,7 +2,7 @@ package com.catnip.foodfood.presentation.fragmentcart
 
 import androidx.lifecycle.ViewModel
 import com.catnip.foodfood.local.database.entity.Cart
-import com.catnip.foodfood.local.database.repository.CartRepository
+import com.catnip.foodfood.repository.CartRepository
 
 class CartViewModel(private val repo: CartRepository) : ViewModel() {
 

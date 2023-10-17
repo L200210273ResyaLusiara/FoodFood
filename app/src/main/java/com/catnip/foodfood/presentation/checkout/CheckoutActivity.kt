@@ -11,7 +11,7 @@ import com.catnip.foodfood.R
 import com.catnip.foodfood.databinding.ActivityCheckoutBinding
 import com.catnip.foodfood.databinding.ActivityMainBinding
 import com.catnip.foodfood.local.database.entity.Cart
-import com.catnip.foodfood.local.database.repository.CartRepository
+import com.catnip.foodfood.repository.CartRepository
 import com.catnip.foodfood.presentation.fragmentcart.CartViewModel
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartAdapter
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartListener
