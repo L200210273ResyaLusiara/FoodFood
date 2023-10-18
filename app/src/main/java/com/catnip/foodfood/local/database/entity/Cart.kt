@@ -8,8 +8,12 @@ import androidx.room.PrimaryKey
 data class Cart(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
-    @ColumnInfo(name = "food_id")
-    var foodId : Int = 0,
+    @ColumnInfo(name = "food_name")
+    var foodName : String? = null,
+    @ColumnInfo(name = "food_image")
+    var foodImage : String? = null,
+    @ColumnInfo(name = "food_price")
+    var foodPrice : Int = 0,
     @ColumnInfo(name = "quantity")
     var quantity: Int = 0,
     @ColumnInfo(name = "notes")

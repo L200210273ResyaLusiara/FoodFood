@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="food"
-            app:argType="com.catnip.foodfood.local.database.entity.Food"
+            app:argType="com.catnip.foodfood.model.Food"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
