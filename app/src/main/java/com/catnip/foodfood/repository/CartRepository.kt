@@ -22,6 +22,9 @@ class CartRepository(application: Application) {
     fun delete(cart: Cart) {
         executorService.execute { mCartDao.deleteCart(cart) }
     }
+    fun deleteAll() {
+        executorService.execute { mCartDao.deleteAllCarts() }
+    }
     fun update(cart: Cart) {
         executorService.execute { mCartDao.updateCart(cart) }
     }
