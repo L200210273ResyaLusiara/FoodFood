@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "339764686518",
+    "project_id": "foodfood-c91ef",
+    "storage_bucket": "foodfood-c91ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339764686518:android:2fa520fc9d7370d7758017",
+        "android_client_info": {
+          "package_name": "com.catnip.foodfood"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtXD-ynGewXxvBwPcuX7hUT1boAkSgFTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
