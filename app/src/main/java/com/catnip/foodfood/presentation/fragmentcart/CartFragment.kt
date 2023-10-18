@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.catnip.foodfood.databinding.FragmentCartBinding
 import com.catnip.foodfood.local.database.entity.Cart
-import com.catnip.foodfood.local.database.repository.CartRepository
+import com.catnip.foodfood.repository.CartRepository
 import com.catnip.foodfood.presentation.checkout.CheckoutActivity
 import com.catnip.foodfood.presentation.checkout.CheckoutViewModel
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartAdapter

@@ -1,4 +1,4 @@
-package com.catnip.foodfood.local.database.repository
+package com.catnip.foodfood.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData

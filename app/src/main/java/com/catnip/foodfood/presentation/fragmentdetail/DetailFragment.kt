@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import coil.load
 import com.catnip.foodfood.databinding.FragmentDetailBinding
-import com.catnip.foodfood.local.database.repository.CartRepository
+import com.catnip.foodfood.repository.CartRepository
 import com.catnip.foodfood.model.Food
 import com.catnip.foodfood.utils.GenericViewModelFactory
 import java.text.NumberFormat

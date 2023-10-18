@@ -15,10 +15,13 @@
         android:theme="@style/Theme.FoodFood"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.checkout.CheckoutActivity"
+            android:name=".presentation.editprofile.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name=".presentation.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +29,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.checkout.CheckoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.main.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

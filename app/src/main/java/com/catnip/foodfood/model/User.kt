@@ -1,12 +1,15 @@
 package com.catnip.foodfood.model
 
-import java.util.UUID
+import com.google.firebase.auth.FirebaseUser
 
 data class User(
-    val id: String = UUID.randomUUID().toString(),
-    val img: Int,
     val username: String,
-    val password: String,
+    val photoUrl: String,
     val email: String,
-    val phone: String
 )
+
+fun FirebaseUser?.toUser(): User? = if (this != null) User(
+    username = this.displayName.orEmpty(),
+    photoUrl = this.photoUrl.toString(),
+    email = this.email.orEmpty(),
+) else null
