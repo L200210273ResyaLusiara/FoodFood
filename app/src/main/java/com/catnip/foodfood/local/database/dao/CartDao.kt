@@ -24,6 +24,9 @@ interface CartDao {
     @Delete
     fun deleteCart(cart: Cart): Int
 
+    @Query("DELETE FROM CARTS")
+    fun deleteAllCarts(): Int
+
     @Update
     fun updateCart(cart: Cart): Int
 }
