@@ -7,9 +7,8 @@ import androidx.activity.viewModels
 import com.catnip.foodfood.data.FirebaseAuthDataSourceImpl
 import com.catnip.foodfood.databinding.ActivityCheckoutBinding
 import com.catnip.foodfood.local.database.entity.Cart
-import com.catnip.foodfood.model.Order
-import com.catnip.foodfood.model.OrderRequest
-import com.catnip.foodfood.model.User
+import com.catnip.foodfood.api.model.order.OrderItemRequest
+import com.catnip.foodfood.api.model.order.OrderRequest
 import com.catnip.foodfood.repository.CartRepository
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartAdapter
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartListener
@@ -22,7 +21,7 @@ import java.util.Locale
 class CheckoutActivity : AppCompatActivity() {
     private lateinit var bind: ActivityCheckoutBinding
     private var total = 0
-    private var listOrder: ArrayList<Order> = arrayListOf()
+    private var listOrderItemRequest: ArrayList<OrderItemRequest> = arrayListOf()
     private val viewModel: CheckoutViewModel by viewModels {
         val firebaseAuth = FirebaseAuth.getInstance()
         val dataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
@@ -56,10 +55,10 @@ class CheckoutActivity : AppCompatActivity() {
     private fun setClickListener() {
         bind.btnCheckout
             .setOnClickListener {
-                if(listOrder.isNotEmpty()){
+                if(listOrderItemRequest.isNotEmpty()){
                     val user = viewModel.getCurrentUser()
                     if (user != null) {
-                        viewModel.order(OrderRequest(user.username, total, listOrder))
+                        viewModel.order(OrderRequest(user.username, total, listOrderItemRequest))
                     }
                 }
 
@@ -79,10 +78,10 @@ class CheckoutActivity : AppCompatActivity() {
             }
             adapter.submitData(result)
             total = 0
-            listOrder = arrayListOf()
+            listOrderItemRequest = arrayListOf()
             for(data in result){
                 total+=data.quantity*data.foodPrice
-                listOrder.add(Order(data.foodName!!,data.quantity,data.notes?:"",data.foodPrice))
+                listOrderItemRequest.add(OrderItemRequest(data.foodName!!,data.quantity,data.notes?:"",data.foodPrice))
             }
             bind.tvTotalPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(total)
         }

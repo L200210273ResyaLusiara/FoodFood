@@ -1,6 +1,6 @@
-package com.catnip.foodfood.model
+package com.catnip.foodfood.api.model.order
 
-data class Order(
+data class OrderItemRequest(
     val nama: String,
     val qty: Int,
     val catatan: String,

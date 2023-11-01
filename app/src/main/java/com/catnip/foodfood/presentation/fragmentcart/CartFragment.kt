@@ -23,7 +23,7 @@ class CartFragment : Fragment() {
     private lateinit var binding: FragmentCartBinding
 
     private val viewModel: CartViewModel by viewModels {
-        GenericViewModelFactory.create( CartViewModel(CartRepository(requireActivity().application),))
+        GenericViewModelFactory.create( CartViewModel(CartRepository(requireActivity().application)))
     }
 
     private val adapter: CartAdapter by lazy {

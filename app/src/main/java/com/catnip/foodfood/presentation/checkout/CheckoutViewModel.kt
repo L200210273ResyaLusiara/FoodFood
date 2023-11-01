@@ -4,10 +4,9 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.catnip.foodfood.api.RetrofitClient
 import com.catnip.foodfood.local.database.entity.Cart
-import com.catnip.foodfood.model.OrderRequest
-import com.catnip.foodfood.model.OrderResponse
+import com.catnip.foodfood.api.model.order.OrderRequest
+import com.catnip.foodfood.api.model.order.OrderResponse
 import com.catnip.foodfood.repository.CartRepository
 import com.catnip.foodfood.repository.UserRepository
 import retrofit2.Call
@@ -41,7 +40,8 @@ class CheckoutViewModel(private val repoCart: CartRepository,private val repoUse
         repoCart.update(cart)
     }
     fun order(orderRequest: OrderRequest){
-        RetrofitClient.apiInstance
+        /*
+        RetrofitClient.apiServiceInstance
             .order(orderRequest)
             .enqueue(object : Callback<OrderResponse> {
                 override fun onResponse(
@@ -59,5 +59,7 @@ class CheckoutViewModel(private val repoCart: CartRepository,private val repoUse
                     }
                 }
             })
+
+         */
     }
 }
