@@ -49,6 +49,7 @@ class CheckoutActivity : AppCompatActivity() {
             .setOnClickListener {
                 viewModel.order()
             }
+
         binding.ivBack.setOnClickListener{
             finish()
         }

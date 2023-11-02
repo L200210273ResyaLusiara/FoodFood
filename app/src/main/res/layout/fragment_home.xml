@@ -41,6 +41,7 @@
             android:layout_marginBottom="24dp"
             app:cardCornerRadius="14dp">
             <LinearLayout
+                android:id="@+id/ll_banner"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:baselineAligned="true"
@@ -85,12 +86,14 @@
             android:orientation="vertical"
             android:gravity="center">
             <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/pb_category_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 android:indeterminate="true"
                 tools:visibility="visible" />
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -113,6 +116,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
             <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switch_list_grid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
@@ -121,12 +125,14 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/pb_food_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:indeterminate="true"
             tools:visibility="visible" />
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_food"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

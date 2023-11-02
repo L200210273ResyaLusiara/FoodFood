@@ -50,6 +50,7 @@
                 tools:text="Satay" />
 
             <TextView
+                android:id="@+id/tv_food_price"
                 style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -32,6 +32,7 @@
             tools:text="Pizza Sosis" />
 
         <TextView
+            android:id="@+id/tv_food_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -105,6 +106,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btn_dec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
@@ -113,6 +115,7 @@
                 android:textColor="@color/white" />
 
             <TextView
+                android:id="@+id/tv_qty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/_1"
@@ -120,6 +123,7 @@
                 android:textStyle="bold" />
 
             <Button
+                android:id="@+id/btn_inc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -129,6 +133,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
