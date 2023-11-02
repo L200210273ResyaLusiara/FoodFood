@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">FoodFood</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_desc_location">Jl. BSD Green Office Park Jl. BSD Grand Boulevard, Sampora, BSD, Kabupaten Tangerang, Banten 15345</string>
     <string name="text_location">Lokasi</string>
     <string name="text_tambahkan_ke_keranjang_28_000">Tambahkan ke Keranjang - 28.000</string>
@@ -25,15 +24,10 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
-    <string name="phone">No. Telepon</string>
     <string name="text_log_in">Log In</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
     <string name="don_t_have_an_account_register">Don\'t have an account? Register</string>
     <string name="already_have_an_account_login">Already have an account? Login</string>
     <string name="register">Register</string>
-    <string name="hint_username">Username</string>
-    <string name="hint_phone">No. Telepon</string>
     <string name="text_error_password_empty">Password should not be empty</string>
     <string name="text_error_email_empty">Email should not be empty</string>
     <string name="text_error_email_invalid">Enter a valid format email</string>
@@ -43,4 +37,18 @@
     <string name="logout">Logout</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="loading">Loading</string>
+    <string name="back_button">back button</string>
+    <string name="edit_button">edit button</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="food_image">Food Image</string>
+    <string name="remove_cart_button">remove cart button</string>
+    <string name="list_makanan">List Makanan</string>
+    <string name="_1">1</string>
+    <string name="add">+</string>
+    <string name="substract">-</string>
+    <string name="hi_resya">Hi, Resya</string>
+    <string name="mau_makan_apa_kamu_hari_ini">Mau makan apa kamu hari ini?</string>
+    <string name="diskon_30">Diskon 30%</string>
+    <string name="pesan_makananmu_di_aplikasi_dan_dapatkan_diskon">Pesan makananmu di aplikasi dan dapatkan diskon</string>\
+    <string name="add_to_cart_button">Tambahkan ke Keranjang - %1$s</string>
 </resources>

@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
-
+import com.catnip.foodfood.R
 import com.catnip.foodfood.databinding.ActivityDetailBinding
 import com.catnip.foodfood.model.Food
 import com.catnip.foodfood.utils.proceedWhen
@@ -40,7 +40,7 @@ private val viewModel: DetailViewModel by viewModels()
     private fun setViewModel() {
         with(viewModel){
             price.observe(this@DetailActivity){
-                binding.btnCart.text="Tambahkan ke Keranjang - ${it.toCurrencyFormat()}"
+                binding.btnCart.text=String.format(resources.getString(R.string.add_to_cart_button),it.toCurrencyFormat())
             }
             quantity.observe(this@DetailActivity){
                 binding.tvQty.text=it.toString()

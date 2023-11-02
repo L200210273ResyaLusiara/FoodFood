@@ -32,7 +32,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/img_satay" />
+                tools:src="@drawable/img_satay"
+                android:contentDescription="@string/food_image"/>
 
             <TextView
                 android:id="@+id/tv_food_name"

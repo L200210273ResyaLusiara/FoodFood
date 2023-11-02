@@ -38,9 +38,9 @@ class CartViewHolder(
                     notes = binding.etNotesItem.text.toString().trim()
                 }
                 cartListener?.onUserDoneEditingNotes(newItem)
-                true
+                return@setOnEditorActionListener true
             }
-            false
+            return@setOnEditorActionListener false
         }
     }
 

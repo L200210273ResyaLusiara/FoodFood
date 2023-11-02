@@ -22,10 +22,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:contentDescription="@string/back_button"/>
 
         <TextView
-            android:id="@+id/tv_title_toolbar"
             style="@style/TextAppearance.Material3.TitleMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +44,6 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_delivery_method"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/ll_action_bar">
@@ -56,7 +55,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_title_delivery_method"
                         style="@style/TextAppearance.Material3.BodyLarge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -64,13 +62,11 @@
                         android:text="@string/text_delivery_method" />
 
                     <RadioGroup
-                        android:id="@+id/rg_delivery_method"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:checkedButton="@+id/rb_delivery"
                         android:orientation="horizontal">
                         <RadioButton
-                            android:id="@+id/rb_pick_up"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -107,7 +103,6 @@
                 tools:listitem="@layout/item_cart" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_payment_method"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/ll_action_bar">
@@ -119,7 +114,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_title_payment_method"
                         style="@style/TextAppearance.Material3.BodyLarge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -127,14 +121,12 @@
                         android:text="@string/text_payment_method" />
 
                     <RadioGroup
-                        android:id="@+id/rg_payment_method"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:checkedButton="@+id/rb_e_wallet"
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/rb_cash"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -159,7 +151,6 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cv_shopping_summary"
                 android:layout_width="match_parent"
                 android:layout_marginTop="8dp"
                 android:layout_height="wrap_content"
@@ -172,7 +163,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_title_shopping_summary"
                         style="@style/TextAppearance.Material3.BodyLarge"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -187,7 +177,6 @@
                         android:weightSum="2">
 
                         <TextView
-                            android:id="@+id/tv_total_item_price"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

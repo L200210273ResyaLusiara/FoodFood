@@ -49,6 +49,7 @@ private val viewModel: CheckoutViewModel by viewModels()
             .setOnClickListener {
                 viewModel.order()
             }
+
         binding.ivBack.setOnClickListener{
             finish()
         }
