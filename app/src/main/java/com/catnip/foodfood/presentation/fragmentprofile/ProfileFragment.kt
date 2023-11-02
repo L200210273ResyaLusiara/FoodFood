@@ -2,37 +2,27 @@ package com.catnip.foodfood.presentation.fragmentprofile
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.catnip.foodfood.R
-import com.catnip.foodfood.data.FirebaseAuthDataSourceImpl
 import com.catnip.foodfood.databinding.FragmentProfileBinding
 import com.catnip.foodfood.presentation.editprofile.EditProfileActivity
 import com.catnip.foodfood.presentation.login.LoginActivity
-import com.catnip.foodfood.repository.UserRepositoryImpl
-import com.catnip.foodfood.utils.GenericViewModelFactory
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private val binding: FragmentProfileBinding by lazy {
         FragmentProfileBinding.inflate(layoutInflater)
     }
-    private fun createViewModel(): ProfileViewModel {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val dataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
-        val repo = UserRepositoryImpl(dataSource)
-        return ProfileViewModel(repo)
-    }
 
-    private val viewModel: ProfileViewModel by viewModels {
-        GenericViewModelFactory.create(createViewModel())
-    }
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onStart() {
         super.onStart()

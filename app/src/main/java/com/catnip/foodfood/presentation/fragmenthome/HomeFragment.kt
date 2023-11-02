@@ -7,46 +7,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.catnip.foodfood.R
-import com.catnip.foodfood.api.datasource.FoodApiDataSource
-import com.catnip.foodfood.api.service.ApiService
 import com.catnip.foodfood.databinding.FragmentHomeBinding
-import com.catnip.foodfood.model.Category
 import com.catnip.foodfood.model.Food
-import com.catnip.foodfood.presentation.fragmentcart.CartViewModel
+import com.catnip.foodfood.presentation.detail.DetailActivity
 import com.catnip.foodfood.presentation.fragmenthome.adapter.AdapterLayoutMode
 import com.catnip.foodfood.presentation.fragmenthome.adapter.CategoryListAdapter
 import com.catnip.foodfood.presentation.fragmenthome.adapter.HomeAdapter
-import com.catnip.foodfood.repository.CartRepository
-import com.catnip.foodfood.repository.FoodRepository
-import com.catnip.foodfood.repository.FoodRepositoryImpl
-import com.catnip.foodfood.utils.GenericViewModelFactory
 import com.catnip.foodfood.utils.proceedWhen
-import com.chuckerteam.chucker.api.ChuckerInterceptor
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel: HomeViewModel by viewModels {
-        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
-        val service = ApiService.invoke(chuckerInterceptor)
-        val dataSource = FoodApiDataSource(service)
-        val repo: FoodRepository =
-            FoodRepositoryImpl(dataSource)
-        GenericViewModelFactory.create(HomeViewModel(repo))
-    }
+    private val viewModel: HomeViewModel by viewModels()
 
     private val foodAdapter: HomeAdapter by lazy {
         HomeAdapter(AdapterLayoutMode.LINEAR) { food: Food ->
@@ -61,9 +45,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToDetail(food: Food) {
-        findNavController().navigate(
-            HomeFragmentDirections.actionNavigationHomeToDetailFragment(food)
-        )
+        DetailActivity.startActivity(requireContext(), food)
     }
 
     override fun onCreateView(

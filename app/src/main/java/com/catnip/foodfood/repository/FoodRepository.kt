@@ -1,6 +1,6 @@
 package com.catnip.foodfood.repository
 
-import com.catnip.foodfood.api.datasource.FoodApiDataSource
+import com.catnip.foodfood.api.datasource.ApiDataSource
 import com.catnip.foodfood.api.model.category.toCategoryList
 import com.catnip.foodfood.api.model.food.toFoodList
 import com.catnip.foodfood.model.Category
@@ -15,7 +15,7 @@ interface FoodRepository {
 }
 
 class FoodRepositoryImpl(
-    private val apiDataSource: FoodApiDataSource
+    private val apiDataSource: ApiDataSource
 ) : FoodRepository {
     override fun getCategories(): Flow<ResultWrapper<List<Category>>> {
         return proceedFlow {

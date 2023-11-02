@@ -5,10 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.catnip.foodfood.local.database.dao.CartDao
-import com.catnip.foodfood.local.database.entity.Cart
+import com.catnip.foodfood.local.database.entity.CartEntity
 
 @Database(
-    entities = [Cart::class],
+    entities = [CartEntity::class],
     version = 1,
     exportSchema = true
 )
@@ -25,7 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     DB_NAME
                 )
-                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 instance

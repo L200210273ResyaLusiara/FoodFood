@@ -9,14 +9,17 @@ import com.catnip.foodfood.model.Food
 import com.catnip.foodfood.presentation.fragmenthome.model.HomeData
 import com.catnip.foodfood.repository.FoodRepository
 import com.catnip.foodfood.utils.ResultWrapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(private val repo: FoodRepository) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor (private val repo: FoodRepository) : ViewModel() {
     private val foodsFlow =
         MutableStateFlow<ResultWrapper<List<Food>>>(ResultWrapper.Loading())
 

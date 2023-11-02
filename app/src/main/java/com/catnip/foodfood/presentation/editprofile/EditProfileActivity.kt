@@ -1,7 +1,6 @@
 package com.catnip.foodfood.presentation.editprofile
 
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
@@ -9,17 +8,15 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.catnip.foodfood.R
-import com.catnip.foodfood.data.FirebaseAuthDataSourceImpl
 import com.catnip.foodfood.databinding.ActivityEditProfileBinding
-import com.catnip.foodfood.databinding.ActivityMainBinding
-import com.catnip.foodfood.repository.UserRepositoryImpl
-import com.catnip.foodfood.utils.GenericViewModelFactory
 import com.catnip.foodfood.utils.proceedWhen
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EditProfileActivity : AppCompatActivity() {
     private var profPic : Uri? = null
 
@@ -27,16 +24,7 @@ class EditProfileActivity : AppCompatActivity() {
         ActivityEditProfileBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: EditProfileViewModel by viewModels {
-        GenericViewModelFactory.create(createViewModel())
-    }
-
-    private fun createViewModel(): EditProfileViewModel {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val dataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
-        val repo = UserRepositoryImpl(dataSource)
-        return EditProfileViewModel(repo)
-    }
+    private val viewModel: EditProfileViewModel by viewModels()
 
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->

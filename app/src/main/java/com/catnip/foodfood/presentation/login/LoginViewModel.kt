@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.catnip.foodfood.repository.UserRepository
 import com.catnip.foodfood.utils.ResultWrapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(private val repository: UserRepository) : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor (private val repository: UserRepository) : ViewModel() {
     fun isUserLoggedIn() = repository.isLoggedIn()
     private val _loginResult = MutableLiveData<ResultWrapper<Boolean>>()
     val loginResult: LiveData<ResultWrapper<Boolean>>
