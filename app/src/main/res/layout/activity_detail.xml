@@ -32,7 +32,6 @@
             tools:text="Pizza Sosis" />
 
         <TextView
-            android:id="@+id/tv_food_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -65,7 +64,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_desc_desc" />
 
     <LinearLayout
-        android:id="@+id/ll_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="29dp"
@@ -75,7 +73,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_desc_desc">
 
         <TextView
-            android:id="@+id/id_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -84,7 +81,6 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/id_location_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -93,7 +89,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
@@ -110,34 +105,30 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_dec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/rounded_button"
-                android:text="-"
+                android:text="@string/substract"
                 android:textColor="@color/white" />
 
             <TextView
-                android:id="@+id/tv_qty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="@string/_1"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/btn_inc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:background="@drawable/rounded_button"
-                android:text="+"
+                android:text="@string/add"
                 android:textColor="@color/white" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"

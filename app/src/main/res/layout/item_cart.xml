@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:src="@tools:sample/avatars" />
+        tools:src="@tools:sample/avatars"
+        android:contentDescription="@string/food_image"/>
 
     <ImageView
         android:id="@+id/iv_remove_cart"
@@ -23,7 +24,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_remove"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/remove_cart_button"/>
 
     <TextView
         android:id="@+id/tv_product_name"
@@ -40,7 +42,6 @@
         tools:text="@tools:sample/lorem" />
 
     <TextView
-        android:id="@+id/tv_product_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
@@ -65,13 +66,11 @@
             android:orientation="horizontal"
             android:padding="4dp">
             <Button
-                android:id="@+id/btn_dec"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
-                android:text="-" />
+                android:text="@string/substract" />
 
             <TextView
-                android:id="@+id/tv_product_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -81,12 +80,11 @@
                 tools:text="23" />
 
             <Button
-                android:id="@+id/btn_inc"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxWidth="240dp"
-                android:text="+" />
+                android:text="@string/add" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

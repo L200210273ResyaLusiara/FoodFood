@@ -23,17 +23,5 @@
     <color name="onSurfaceColor">#000000</color>
 
     <!-- Dark mode colors -->
-    <color name="primaryColorDark">#121212</color>
-    <color name="primaryVariantColorDark">#000000</color>
-    <color name="onPrimaryColorDark">#FFFFFF</color>
 
-    <color name="secondaryColorDark">#FF5722</color>
-    <color name="secondaryVariantColorDark">#E64A19</color>
-    <color name="onSecondaryColorDark">#FFFFFF</color>
-
-    <color name="backgroundColorDark">#121212</color>
-    <color name="onBackgroundColorDark">#FFFFFF</color>
-
-    <color name="surfaceColorDark">#1E1E1E</color>
-    <color name="onSurfaceColorDark">#FFFFFF</color>
 </resources>
