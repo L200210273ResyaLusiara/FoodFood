@@ -1,7 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.FoodFood" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.FoodFood.Dark" parent="Base.Theme.FoodFood">
+        <item name="colorPrimary">@color/primaryColorDark</item>
+        <item name="colorPrimaryVariant">@color/primaryVariantColorDark</item>
+        <item name="colorOnPrimary">@color/onPrimaryColorDark</item>
+
+        <item name="colorSecondary">@color/secondaryColorDark</item>
+        <item name="colorSecondaryVariant">@color/secondaryVariantColorDark</item>
+        <item name="colorOnSecondary">@color/onSecondaryColorDark</item>
+
+        <item name="backgroundColor">@color/backgroundColorDark</item>
+        <item name="colorOnBackground">@color/onBackgroundColorDark</item>
+
+        <item name="colorSurface">@color/surfaceColorDark</item>
+        <item name="colorOnSurface">@color/onSurfaceColorDark</item>
+
+        <item name="android:statusBarColor">@color/primaryVariantColorDark</item>
     </style>
 </resources>

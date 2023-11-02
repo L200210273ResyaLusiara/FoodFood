@@ -1,7 +1,6 @@
 package com.catnip.foodfood.presentation.fragmentcart.adapter
 
-import com.catnip.foodfood.local.database.entity.Cart
-
+import com.catnip.foodfood.model.Cart
 
 interface CartListener {
     fun onPlusTotalItemCartClicked(cart: Cart)

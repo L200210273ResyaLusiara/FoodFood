@@ -5,9 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.catnip.foodfood.core.ViewHolderBinder
 import com.catnip.foodfood.databinding.ItemCartBinding
-import com.catnip.foodfood.local.database.entity.Cart
-import java.text.NumberFormat
-import java.util.Locale
+import com.catnip.foodfood.model.Cart
+import com.catnip.foodfood.utils.toCurrencyFormat
 
 class CartViewHolder(
     private val binding: ItemCartBinding,
@@ -26,7 +25,7 @@ class CartViewHolder(
             }
             tvProductCount.text = item.quantity.toString()
             tvProductName.text = item.foodName
-            tvProductPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(item.quantity * item.foodPrice)
+            tvProductPrice.text = (item.quantity * item.foodPrice).toCurrencyFormat()
         }
     }
 

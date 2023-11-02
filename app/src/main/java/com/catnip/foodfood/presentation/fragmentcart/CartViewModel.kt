@@ -1,28 +1,45 @@
 package com.catnip.foodfood.presentation.fragmentcart
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.catnip.foodfood.local.database.entity.Cart
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.catnip.foodfood.model.Cart
 import com.catnip.foodfood.repository.CartRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class CartViewModel(private val repo: CartRepository) : ViewModel() {
+class CartViewModel(private val repoCart: CartRepository) : ViewModel() {
 
-    val cartList = repo.getAllCarts()
+    val cartList = repoCart.getCarts().asLiveData(Dispatchers.IO)
 
     fun decreaseCart(cart: Cart) {
-        cart.quantity-=1
-        if(cart.quantity==0){
-            repo.delete(cart)
-        }else{
-            repo.update(cart)
+        viewModelScope.launch {
+            repoCart.decreaseCart(cart).collect {
+                Log.d("CheckoutViewModel", " : Increase Cart -> $it ${it.payload} ${it.exception}")
+            }
         }
     }
+
     fun increaseCart(cart: Cart) {
-        repo.update(cart.apply { quantity+=1 })
+        viewModelScope.launch {
+            repoCart.increaseCart(cart).collect {
+                Log.d("CheckoutViewModel", " : Increase Cart -> $it ${it.payload} ${it.exception}")
+            }
+        }
     }
+
     fun deleteCart(cart: Cart){
-        repo.delete(cart)
+        viewModelScope.launch {
+            repoCart.deleteCart(cart).collect {
+                Log.d("CheckoutViewModel", " : Remove Cart -> $it ${it.payload} ${it.exception}")
+            }
+        }
     }
+
     fun updateCartNote(cart: Cart){
-        repo.update(cart)
+        viewModelScope.launch {
+            repoCart.setCartNotes(cart)
+        }
     }
 }

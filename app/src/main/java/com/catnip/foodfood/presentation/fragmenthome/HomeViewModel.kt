@@ -1,67 +1,47 @@
 package com.catnip.foodfood.presentation.fragmenthome
 
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.catnip.foodfood.api.RetrofitClient
-import com.catnip.foodfood.local.database.AppDatabase
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.catnip.foodfood.model.Category
-import com.catnip.foodfood.model.CategoryResponse
 import com.catnip.foodfood.model.Food
-import com.catnip.foodfood.model.FoodResponse
-import com.catnip.foodfood.model.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.catnip.foodfood.presentation.fragmenthome.model.HomeData
+import com.catnip.foodfood.repository.FoodRepository
+import com.catnip.foodfood.utils.ResultWrapper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
-    private val foods = MutableLiveData<List<Food>>()
-    private val categories = MutableLiveData<List<Category>>()
-    fun setFoods() {
-        RetrofitClient.apiInstance
-            .getFoods()
-            .enqueue(object : Callback<FoodResponse> {
-                override fun onResponse(
-                    call: Call<FoodResponse>,
-                    response: Response<FoodResponse>
-                ) {
-                    if (response.isSuccessful){
-                        foods.postValue(response.body()?.data)
-                    }
-                }
-                override fun onFailure(call: Call<FoodResponse>, t: Throwable) {
-                    t.message?.let { Log.d("Failure", it) }
-                }
-            })
+class HomeViewModel(private val repo: FoodRepository) : ViewModel() {
+    private val foodsFlow =
+        MutableStateFlow<ResultWrapper<List<Food>>>(ResultWrapper.Loading())
 
-    }
+    val homeData: LiveData<HomeData>
+        get() = repo.getCategories().combine(foodsFlow) { f1, f2 -> Pair(f1, f2) }
+            .map { (categories, products) ->
+                mapToHomeData(categories, products)
+            }.onStart {
+                setSelectedCategory(null)
+            }.asLiveData(Dispatchers.IO)
 
-    fun getFoods(): LiveData<List<Food>>{
-        return foods
-    }
+    private fun mapToHomeData(
+        categoryResult: ResultWrapper<List<Category>>,
+        foodResult: ResultWrapper<List<Food>>
+    ): HomeData =
+        HomeData(
+            categories = categoryResult,
+            foods = foodResult
+        )
 
-    fun setCategories() {
-        RetrofitClient.apiInstance
-            .getCategories()
-            .enqueue(object : Callback<CategoryResponse> {
-                override fun onResponse(
-                    call: Call<CategoryResponse>,
-                    response: Response<CategoryResponse>
-                ) {
-                    if (response.isSuccessful){
-                        categories.postValue(response.body()?.data)
-                    }
-                }
-                override fun onFailure(call: Call<CategoryResponse>, t: Throwable) {
-                    t.message?.let { Log.d("Failure", it) }
-                }
-            })
-
-    }
-
-    fun getCategories(): LiveData<List<Category>>{
-        return categories
+    fun setSelectedCategory(category: String? = null) {
+        viewModelScope.launch {
+            repo.getProducts(if (category == "all") null else category).collect {
+                foodsFlow.emit(it)
+            }
+        }
     }
 }

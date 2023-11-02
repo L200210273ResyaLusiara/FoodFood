@@ -1,4 +1,4 @@
-package com.catnip.foodfood.model
+package com.catnip.foodfood.api.model.order
 
 data class OrderResponse(
     val status: Boolean,

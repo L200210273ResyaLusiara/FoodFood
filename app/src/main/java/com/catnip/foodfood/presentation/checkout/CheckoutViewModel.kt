@@ -4,60 +4,67 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.catnip.foodfood.api.RetrofitClient
-import com.catnip.foodfood.local.database.entity.Cart
-import com.catnip.foodfood.model.OrderRequest
-import com.catnip.foodfood.model.OrderResponse
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.catnip.foodfood.model.Cart
 import com.catnip.foodfood.repository.CartRepository
 import com.catnip.foodfood.repository.UserRepository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.catnip.foodfood.utils.ResultWrapper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CheckoutViewModel(private val repoCart: CartRepository,private val repoUser: UserRepository) : ViewModel() {
-    val cartList = repoCart.getAllCarts()
-    fun getCurrentUser() = repoUser.getCurrentUser()
-    private val _orderResult = MutableLiveData<OrderResponse>()
-    val orderResult: LiveData<OrderResponse>
-        get() = _orderResult
+    val cartList = repoCart.getCarts().asLiveData(Dispatchers.IO)
+    val currentUser = repoUser.getCurrentUser()
+
+    private val _checkoutResult = MutableLiveData<ResultWrapper<Boolean>>()
+    val checkoutResult: LiveData<ResultWrapper<Boolean>>
+        get() = _checkoutResult
+
     fun decreaseCart(cart: Cart) {
-        cart.quantity-=1
-        if(cart.quantity==0){
-            repoCart.delete(cart)
-        }else{
-            repoCart.update(cart)
+        viewModelScope.launch {
+            repoCart.decreaseCart(cart).collect {
+                Log.d("CheckoutViewModel", " : Increase Cart -> $it ${it.payload} ${it.exception}")
+            }
         }
     }
-    fun increaseCart(cart: Cart) {
-        repoCart.update(cart.apply { quantity+=1 })
-    }
-    fun deleteCart(cart: Cart){
-        repoCart.delete(cart)
-    }
-    fun deleteAll(){
-        repoCart.deleteAll()
-    }
-    fun updateCartNote(cart: Cart){
-        repoCart.update(cart)
-    }
-    fun order(orderRequest: OrderRequest){
-        RetrofitClient.apiInstance
-            .order(orderRequest)
-            .enqueue(object : Callback<OrderResponse> {
-                override fun onResponse(
-                    call: Call<OrderResponse>,
-                    response: Response<OrderResponse>
-                ) {
-                    if (response.isSuccessful){
-                        _orderResult.postValue(response.body())
-                    }
-                }
 
-                override fun onFailure(call: Call<OrderResponse>, t: Throwable) {
-                    t.message?.let {
-                        Log.d("Failure", it)
-                    }
+    fun increaseCart(cart: Cart) {
+        viewModelScope.launch {
+            repoCart.increaseCart(cart).collect {
+                Log.d("CheckoutViewModel", " : Increase Cart -> $it ${it.payload} ${it.exception}")
+            }
+        }
+    }
+
+    fun deleteCart(cart: Cart){
+        viewModelScope.launch {
+            repoCart.deleteCart(cart).collect {
+                Log.d("CheckoutViewModel", " : Remove Cart -> $it ${it.payload} ${it.exception}")
+            }
+        }
+    }
+
+    fun updateCartNote(cart: Cart){
+        viewModelScope.launch {
+            repoCart.setCartNotes(cart)
+        }
+    }
+
+    fun order() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val carts = cartList.value?.payload?.first ?: return@launch
+            currentUser?.let {user->
+                repoCart.order(carts, user.username).collect {
+                    _checkoutResult.postValue(it)
                 }
-            })
+            }
+        }
+    }
+
+    fun deleteAll(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repoCart.deleteAll()
+        }
     }
 }
