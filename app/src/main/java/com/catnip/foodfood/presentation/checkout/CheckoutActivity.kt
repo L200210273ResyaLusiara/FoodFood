@@ -4,30 +4,43 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
+import com.catnip.foodfood.api.datasource.FoodApiDataSource
 import com.catnip.foodfood.data.FirebaseAuthDataSourceImpl
 import com.catnip.foodfood.databinding.ActivityCheckoutBinding
-import com.catnip.foodfood.local.database.entity.Cart
-import com.catnip.foodfood.api.model.order.OrderItemRequest
-import com.catnip.foodfood.api.model.order.OrderRequest
+import com.catnip.foodfood.api.service.ApiService
+import com.catnip.foodfood.local.database.AppDatabase
+import com.catnip.foodfood.local.database.datasource.CartDataSource
+import com.catnip.foodfood.local.database.datasource.CartDatabaseDataSource
+import com.catnip.foodfood.model.Cart
 import com.catnip.foodfood.repository.CartRepository
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartAdapter
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartListener
+import com.catnip.foodfood.repository.CartRepositoryImpl
 import com.catnip.foodfood.repository.UserRepositoryImpl
 import com.catnip.foodfood.utils.GenericViewModelFactory
+import com.catnip.foodfood.utils.proceedWhen
+import com.catnip.foodfood.utils.toCurrencyFormat
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.firebase.auth.FirebaseAuth
-import java.text.NumberFormat
-import java.util.Locale
 
 class CheckoutActivity : AppCompatActivity() {
-    private lateinit var bind: ActivityCheckoutBinding
-    private var total = 0
-    private var listOrderItemRequest: ArrayList<OrderItemRequest> = arrayListOf()
+    private lateinit var binding: ActivityCheckoutBinding
+
     private val viewModel: CheckoutViewModel by viewModels {
         val firebaseAuth = FirebaseAuth.getInstance()
-        val dataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
-        val repo = UserRepositoryImpl(dataSource)
-        GenericViewModelFactory.create(CheckoutViewModel(CartRepository(application),repo))
+        val authDataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
+        val userRepo = UserRepositoryImpl(authDataSource)
+        val database = AppDatabase.getInstance(this)
+        val cartDao = database.cartDao()
+        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
+        val chuckerInterceptor = ChuckerInterceptor(applicationContext)
+        val service = ApiService.invoke(chuckerInterceptor)
+        val apiDataSource = FoodApiDataSource(service)
+        val cartRepo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource)
+        GenericViewModelFactory.create(CheckoutViewModel(cartRepo,userRepo))
     }
+
     private val adapter: CartAdapter by lazy {
         CartAdapter(object : CartListener {
             override fun onPlusTotalItemCartClicked(cart: Cart) {
@@ -44,52 +57,66 @@ class CheckoutActivity : AppCompatActivity() {
             }
         })
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bind = ActivityCheckoutBinding.inflate(layoutInflater)
-        setContentView(bind.root)
+        binding = ActivityCheckoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupList()
         observeData()
         setClickListener()
     }
     private fun setClickListener() {
-        bind.btnCheckout
+        binding.btnCheckout
             .setOnClickListener {
-                if(listOrderItemRequest.isNotEmpty()){
-                    val user = viewModel.getCurrentUser()
-                    if (user != null) {
-                        viewModel.order(OrderRequest(user.username, total, listOrderItemRequest))
-                    }
-                }
-
+                viewModel.order()
             }
-        bind.ivBack.setOnClickListener{
+        binding.ivBack.setOnClickListener{
             finish()
         }
     }
     private fun setupList() {
-        bind.rvCart.itemAnimator = null
-        bind.rvCart.adapter = adapter
+        binding.rvCart.itemAnimator = null
+        binding.rvCart.adapter = adapter
     }
     private fun observeData() {
-        viewModel.cartList.observe(this) { result ->
-            if(result.isEmpty()){
-                finish()
-            }
-            adapter.submitData(result)
-            total = 0
-            listOrderItemRequest = arrayListOf()
-            for(data in result){
-                total+=data.quantity*data.foodPrice
-                listOrderItemRequest.add(OrderItemRequest(data.foodName!!,data.quantity,data.notes?:"",data.foodPrice))
-            }
-            bind.tvTotalPrice.text = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(total)
+        viewModel.checkoutResult.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    binding.cvProgress.isVisible=false
+                    viewModel.deleteAll()
+                },
+                doOnError = {
+                    binding.cvProgress.isVisible=false
+                    Toast.makeText(this, "Checkout Error", Toast.LENGTH_SHORT).show()
+                },
+                doOnLoading = {
+                    binding.cvProgress.isVisible=true
+                }
+            )
         }
-        viewModel.orderResult.observe(this){ result ->
-            if(result.status){
-                viewModel.deleteAll()
-                Toast.makeText(this,result.message,Toast.LENGTH_LONG).show()
-            }
+        viewModel.cartList.observe(this) {
+            it.proceedWhen(
+                doOnSuccess = { result ->
+                    binding.cvProgress.isVisible=false
+                    binding.rvCart.isVisible=true
+                    result.payload?.let { (carts, totalPrice) ->
+                        adapter.submitData(carts)
+                        binding.tvTotalPrice.text = totalPrice.toCurrencyFormat()
+                    }
+                },
+                doOnError = {
+                    finish()
+                },
+                doOnLoading = {
+                    binding.cvProgress.isVisible=true
+                    binding.rvCart.isVisible=false
+                },
+                doOnEmpty = {
+                    Toast.makeText(this@CheckoutActivity,"Checkout successfull",Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            )
         }
     }
 }

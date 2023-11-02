@@ -6,4 +6,34 @@
     <color name="grey_text">#767676</color>
     <color name="grey_background">#CCEDEDED</color>
     <color name="primary">#FF6750A4</color>
+
+    <!-- Light mode colors -->
+    <color name="primaryColor">#2196F3</color>
+    <color name="primaryVariantColor">#1976D2</color>
+    <color name="onPrimaryColor">#FFFFFF</color>
+
+    <color name="secondaryColor">#FF5722</color>
+    <color name="secondaryVariantColor">#E64A19</color>
+    <color name="onSecondaryColor">#FFFFFF</color>
+
+    <color name="backgroundColor">#FFFFFF</color>
+    <color name="onBackgroundColor">#000000</color>
+
+    <color name="surfaceColor">#F5F5F5</color>
+    <color name="onSurfaceColor">#000000</color>
+
+    <!-- Dark mode colors -->
+    <color name="primaryColorDark">#121212</color>
+    <color name="primaryVariantColorDark">#000000</color>
+    <color name="onPrimaryColorDark">#FFFFFF</color>
+
+    <color name="secondaryColorDark">#FF5722</color>
+    <color name="secondaryVariantColorDark">#E64A19</color>
+    <color name="onSecondaryColorDark">#FFFFFF</color>
+
+    <color name="backgroundColorDark">#121212</color>
+    <color name="onBackgroundColorDark">#FFFFFF</color>
+
+    <color name="surfaceColorDark">#1E1E1E</color>
+    <color name="onSurfaceColorDark">#FFFFFF</color>
 </resources>
