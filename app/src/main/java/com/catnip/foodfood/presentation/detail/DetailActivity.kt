@@ -8,34 +8,19 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
-import com.catnip.foodfood.api.datasource.FoodApiDataSource
-import com.catnip.foodfood.api.service.ApiService
+
 import com.catnip.foodfood.databinding.ActivityDetailBinding
-import com.catnip.foodfood.local.database.AppDatabase
-import com.catnip.foodfood.local.database.datasource.CartDataSource
-import com.catnip.foodfood.local.database.datasource.CartDatabaseDataSource
 import com.catnip.foodfood.model.Food
-import com.catnip.foodfood.repository.CartRepository
-import com.catnip.foodfood.repository.CartRepositoryImpl
-import com.catnip.foodfood.utils.GenericViewModelFactory
 import com.catnip.foodfood.utils.proceedWhen
 import com.catnip.foodfood.utils.toCurrencyFormat
-import com.chuckerteam.chucker.api.ChuckerInterceptor
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private var food: Food? = null
 
-    private val viewModel: DetailViewModel by viewModels {
-        val database = AppDatabase.getInstance(this)
-        val cartDao = database.cartDao()
-        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val chuckerInterceptor = ChuckerInterceptor(applicationContext)
-        val service = ApiService.invoke(chuckerInterceptor)
-        val apiDataSource = FoodApiDataSource(service)
-        val cartRepo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource)
-        GenericViewModelFactory.create(DetailViewModel(food!!,cartRepo))
-    }
+private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +31,7 @@ class DetailActivity : AppCompatActivity() {
         if(food==null){
             finish()
         }
-
+        viewModel.setFood(food)
         showMenuData()
         setClickListener()
         setViewModel()

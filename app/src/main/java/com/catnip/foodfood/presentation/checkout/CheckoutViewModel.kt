@@ -10,17 +10,19 @@ import com.catnip.foodfood.model.Cart
 import com.catnip.foodfood.repository.CartRepository
 import com.catnip.foodfood.repository.UserRepository
 import com.catnip.foodfood.utils.ResultWrapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CheckoutViewModel(private val repoCart: CartRepository,private val repoUser: UserRepository) : ViewModel() {
+@HiltViewModel
+class CheckoutViewModel @Inject constructor(private val repoCart: CartRepository, repoUser: UserRepository) : ViewModel() {
     val cartList = repoCart.getCarts().asLiveData(Dispatchers.IO)
     val currentUser = repoUser.getCurrentUser()
 
     private val _checkoutResult = MutableLiveData<ResultWrapper<Boolean>>()
     val checkoutResult: LiveData<ResultWrapper<Boolean>>
         get() = _checkoutResult
-
     fun decreaseCart(cart: Cart) {
         viewModelScope.launch {
             repoCart.decreaseCart(cart).collect {

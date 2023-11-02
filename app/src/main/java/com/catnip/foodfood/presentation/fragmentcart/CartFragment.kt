@@ -11,34 +11,21 @@ import androidx.fragment.app.viewModels
 import com.catnip.foodfood.api.datasource.FoodApiDataSource
 import com.catnip.foodfood.api.service.ApiService
 import com.catnip.foodfood.databinding.FragmentCartBinding
-import com.catnip.foodfood.local.database.AppDatabase
-import com.catnip.foodfood.local.database.datasource.CartDataSource
-import com.catnip.foodfood.local.database.datasource.CartDatabaseDataSource
+
 import com.catnip.foodfood.model.Cart
 import com.catnip.foodfood.presentation.checkout.CheckoutActivity
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartAdapter
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartListener
-import com.catnip.foodfood.repository.CartRepository
-import com.catnip.foodfood.repository.CartRepositoryImpl
-import com.catnip.foodfood.utils.GenericViewModelFactory
 import com.catnip.foodfood.utils.proceedWhen
 import com.catnip.foodfood.utils.toCurrencyFormat
-import com.chuckerteam.chucker.api.ChuckerInterceptor
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CartFragment : Fragment() {
 
     private lateinit var binding: FragmentCartBinding
 
-    private val viewModel: CartViewModel by viewModels {
-        val database = AppDatabase.getInstance(requireContext())
-        val cartDao = database.cartDao()
-        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val chuckerInterceptor = ChuckerInterceptor(requireContext().applicationContext)
-        val service = ApiService.invoke(chuckerInterceptor)
-        val apiDataSource = FoodApiDataSource(service)
-        val cartRepo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource)
-        GenericViewModelFactory.create( CartViewModel(cartRepo))
-    }
+    private val viewModel: CartViewModel by viewModels()
 
     private val adapter: CartAdapter by lazy {
         CartAdapter(object : CartListener {

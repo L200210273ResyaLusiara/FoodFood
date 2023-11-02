@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.catnip.foodfood.repository.UserRepository
 import com.catnip.foodfood.utils.ResultWrapper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel(private val repository: UserRepository) : ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor (private val repository: UserRepository) : ViewModel() {
     private val _registerResult = MutableLiveData<ResultWrapper<Boolean>>()
     val registerResult: LiveData<ResultWrapper<Boolean>>
         get() = _registerResult

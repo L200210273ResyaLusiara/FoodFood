@@ -6,8 +6,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.catnip.foodfood.R
 import com.catnip.foodfood.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var bind:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,45 +1,23 @@
 package com.catnip.foodfood.presentation.checkout
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.catnip.foodfood.api.datasource.FoodApiDataSource
-import com.catnip.foodfood.data.FirebaseAuthDataSourceImpl
 import com.catnip.foodfood.databinding.ActivityCheckoutBinding
-import com.catnip.foodfood.api.service.ApiService
-import com.catnip.foodfood.local.database.AppDatabase
-import com.catnip.foodfood.local.database.datasource.CartDataSource
-import com.catnip.foodfood.local.database.datasource.CartDatabaseDataSource
 import com.catnip.foodfood.model.Cart
-import com.catnip.foodfood.repository.CartRepository
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartAdapter
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartListener
-import com.catnip.foodfood.repository.CartRepositoryImpl
-import com.catnip.foodfood.repository.UserRepositoryImpl
-import com.catnip.foodfood.utils.GenericViewModelFactory
 import com.catnip.foodfood.utils.proceedWhen
 import com.catnip.foodfood.utils.toCurrencyFormat
-import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CheckoutActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCheckoutBinding
 
-    private val viewModel: CheckoutViewModel by viewModels {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val authDataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
-        val userRepo = UserRepositoryImpl(authDataSource)
-        val database = AppDatabase.getInstance(this)
-        val cartDao = database.cartDao()
-        val cartDataSource: CartDataSource = CartDatabaseDataSource(cartDao)
-        val chuckerInterceptor = ChuckerInterceptor(applicationContext)
-        val service = ApiService.invoke(chuckerInterceptor)
-        val apiDataSource = FoodApiDataSource(service)
-        val cartRepo: CartRepository = CartRepositoryImpl(cartDataSource, apiDataSource)
-        GenericViewModelFactory.create(CheckoutViewModel(cartRepo,userRepo))
-    }
+private val viewModel: CheckoutViewModel by viewModels()
 
     private val adapter: CartAdapter by lazy {
         CartAdapter(object : CartListener {

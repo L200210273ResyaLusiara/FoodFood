@@ -1,6 +1,6 @@
 package com.catnip.foodfood.repository
 
-import com.catnip.foodfood.api.datasource.FoodApiDataSource
+import com.catnip.foodfood.api.datasource.ApiDataSource
 import com.catnip.foodfood.api.model.order.OrderItemRequest
 import com.catnip.foodfood.api.model.order.OrderRequest
 import com.catnip.foodfood.local.database.datasource.CartDataSource
@@ -31,7 +31,7 @@ interface CartRepository {
 
 class CartRepositoryImpl(
     private val cartDataSource: CartDataSource,
-    private val apiDataSource: FoodApiDataSource
+    private val apiDataSource: ApiDataSource
 ) : CartRepository {
     override fun getCarts(): Flow<ResultWrapper<Pair<List<Cart>, Int>>> {
         return cartDataSource.getAllCarts()

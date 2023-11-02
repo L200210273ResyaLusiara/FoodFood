@@ -1,39 +1,27 @@
 package com.catnip.foodfood.presentation.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.catnip.foodfood.R
-import com.catnip.foodfood.data.FirebaseAuthDataSourceImpl
 import com.catnip.foodfood.databinding.ActivityLoginBinding
 import com.catnip.foodfood.presentation.main.MainActivity
 import com.catnip.foodfood.presentation.register.RegisterActivity
-import com.catnip.foodfood.repository.UserRepositoryImpl
-import com.catnip.foodfood.utils.GenericViewModelFactory
 import com.catnip.foodfood.utils.highLightWord
 import com.catnip.foodfood.utils.proceedWhen
-import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: LoginViewModel by viewModels {
-        GenericViewModelFactory.create(createViewModel())
-    }
-
-    private fun createViewModel(): LoginViewModel {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        val dataSource = FirebaseAuthDataSourceImpl(firebaseAuth)
-        val repo = UserRepositoryImpl(dataSource)
-        return LoginViewModel(repo)
-    }
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -6,13 +6,15 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.catnip.foodfood.model.Cart
 import com.catnip.foodfood.repository.CartRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CartViewModel(private val repoCart: CartRepository) : ViewModel() {
+@HiltViewModel
+class CartViewModel @Inject constructor(private val repoCart: CartRepository) : ViewModel() {
 
     val cartList = repoCart.getCarts().asLiveData(Dispatchers.IO)
-
     fun decreaseCart(cart: Cart) {
         viewModelScope.launch {
             repoCart.decreaseCart(cart).collect {
