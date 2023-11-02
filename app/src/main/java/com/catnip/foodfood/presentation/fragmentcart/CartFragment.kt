@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.catnip.foodfood.api.datasource.FoodApiDataSource
+import com.catnip.foodfood.api.service.ApiService
 import com.catnip.foodfood.databinding.FragmentCartBinding
+
 import com.catnip.foodfood.model.Cart
 import com.catnip.foodfood.presentation.checkout.CheckoutActivity
 import com.catnip.foodfood.presentation.fragmentcart.adapter.CartAdapter

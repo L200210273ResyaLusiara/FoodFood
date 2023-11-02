@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CheckoutActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCheckoutBinding
 
-    private val viewModel: CheckoutViewModel by viewModels()
+private val viewModel: CheckoutViewModel by viewModels()
 
     private val adapter: CartAdapter by lazy {
         CartAdapter(object : CartListener {

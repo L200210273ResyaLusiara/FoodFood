@@ -23,7 +23,6 @@ class CheckoutViewModel @Inject constructor(private val repoCart: CartRepository
     private val _checkoutResult = MutableLiveData<ResultWrapper<Boolean>>()
     val checkoutResult: LiveData<ResultWrapper<Boolean>>
         get() = _checkoutResult
-
     fun decreaseCart(cart: Cart) {
         viewModelScope.launch {
             repoCart.decreaseCart(cart).collect {
