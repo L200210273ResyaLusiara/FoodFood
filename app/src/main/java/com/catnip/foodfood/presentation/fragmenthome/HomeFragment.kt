@@ -22,6 +22,7 @@ import com.catnip.foodfood.presentation.detail.DetailActivity
 import com.catnip.foodfood.presentation.fragmenthome.adapter.AdapterLayoutMode
 import com.catnip.foodfood.presentation.fragmenthome.adapter.CategoryListAdapter
 import com.catnip.foodfood.presentation.fragmenthome.adapter.HomeAdapter
+
 import com.catnip.foodfood.utils.proceedWhen
 import dagger.hilt.android.AndroidEntryPoint
 

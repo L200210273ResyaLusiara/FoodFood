@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
+
 import com.catnip.foodfood.databinding.ActivityDetailBinding
 import com.catnip.foodfood.model.Food
 import com.catnip.foodfood.utils.proceedWhen
@@ -19,7 +20,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
     private var food: Food? = null
 
-    private val viewModel: DetailViewModel by viewModels()
+private val viewModel: DetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
