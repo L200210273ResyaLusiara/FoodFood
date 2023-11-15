@@ -1,7 +1,6 @@
 package com.catnip.foodfood.data
 
 import android.net.Uri
-import com.catnip.foodfood.model.toUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -12,21 +11,16 @@ import kotlinx.coroutines.tasks.await
 interface FirebaseAuthDataSource {
     @Throws(exceptionClasses = [Exception::class])
     suspend fun doLogin(email: String, password: String): Boolean
-
     @Throws(exceptionClasses = [Exception::class])
     suspend fun doRegister(username: String, email: String, password: String): Boolean
-
     suspend fun updateProfile(
         username: String? = null,
         email: String? = null,
         password: String? = null,
         photoUri: Uri? = null
     ): Boolean
-
-    fun doLogout(): Boolean
-
+    fun doLogout()
     fun isLoggedIn(): Boolean
-
     fun getCurrentUser(): FirebaseUser?
 }
 
@@ -66,7 +60,7 @@ class FirebaseAuthDataSourceImpl(private val firebaseAuth: FirebaseAuth) : Fireb
         return true
     }
 
-    private suspend fun updatePassword(newPassword: String): Boolean {
+    suspend fun updatePassword(newPassword: String): Boolean {
         getCurrentUser()?.updatePassword(newPassword)?.await()
         return true
     }
@@ -80,9 +74,8 @@ class FirebaseAuthDataSourceImpl(private val firebaseAuth: FirebaseAuth) : Fireb
         return firebaseAuth.currentUser
     }
 
-    override fun doLogout(): Boolean {
+    override fun doLogout() {
         Firebase.auth.signOut()
-        return true
     }
 
     override fun isLoggedIn(): Boolean {

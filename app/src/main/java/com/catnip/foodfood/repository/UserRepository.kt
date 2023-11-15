@@ -17,7 +17,7 @@ interface UserRepository {
         password: String
     ): Flow<ResultWrapper<Boolean>>
 
-    fun doLogout(): Boolean
+    fun doLogout()
 
     fun isLoggedIn(): Boolean
 
@@ -44,8 +44,8 @@ class UserRepositoryImpl(private val dataSource: FirebaseAuthDataSource) : UserR
         return proceedFlow { dataSource.doRegister(username, email, password) }
     }
 
-    override fun doLogout(): Boolean {
-        return dataSource.doLogout()
+    override fun doLogout() {
+        dataSource.doLogout()
     }
 
     override fun isLoggedIn(): Boolean {
