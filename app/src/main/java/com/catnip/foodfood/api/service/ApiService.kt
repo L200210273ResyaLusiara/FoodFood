@@ -1,5 +1,5 @@
 package com.catnip.foodfood.api.service
-
+import com.catnip.foodfood.BuildConfig
 import com.catnip.foodfood.api.model.category.CategoriesResponse
 import com.catnip.foodfood.api.model.food.FoodsResponse
 import com.catnip.foodfood.api.model.order.OrderRequest
@@ -38,7 +38,7 @@ interface ApiService {
                 .readTimeout(120, TimeUnit.SECONDS)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://55b8df8a-4893-4583-8a7c-d5ff55d753fc.mock.pstmn.io/")
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()

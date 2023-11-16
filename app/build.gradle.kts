@@ -23,7 +23,22 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    productFlavors {
+        create("production") {
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://696e3f73-4c95-4f40-8801-1a210bcbd983.mock.pstmn.io\""
+            )
+        }
+        create("integration") {
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://fb996541-96a6-42e9-98bf-76128f165926.mock.pstmn.io\""
+            )
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -43,7 +58,9 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
+    flavorDimensions += "env"
 
     testOptions {
         unitTests.isReturnDefaultValues = true
