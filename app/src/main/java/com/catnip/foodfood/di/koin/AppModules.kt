@@ -1,5 +1,6 @@
 package com.catnip.foodfood.di.koin
 
+import android.content.Context
 import com.catnip.foodfood.api.datasource.ApiDataSource
 import com.catnip.foodfood.api.datasource.FoodApiDataSource
 import com.catnip.foodfood.api.service.ApiService
@@ -28,6 +29,7 @@ import com.catnip.foodfood.presentation.fragmenthome.HomeViewModel
 import com.catnip.foodfood.presentation.fragmentprofile.ProfileViewModel
 import com.catnip.foodfood.presentation.login.LoginViewModel
 import com.catnip.foodfood.presentation.register.RegisterViewModel
+import com.google.firebase.FirebaseApp
 
 object AppModules {
 
@@ -43,6 +45,7 @@ object AppModules {
 
     private val firebaseModule = module {
         single { FirebaseAuth.getInstance() }
+        single { FirebaseApp.initializeApp(androidContext()) }
     }
 
     private val dataSourceModule = module {
